@@ -1,0 +1,42 @@
+FROM rust:latest
+
+# Install the required dependencies
+RUN apt-get update && apt-get install -y \
+    clang \
+    cmake \
+    pkg-config \
+    nano
+
+# Copy the shell script
+COPY script.sh /root/script.sh
+
+# Make the script executable
+RUN chmod +x /root/script.sh
+
+
+
+# Optionally install additional image
+# Uncomment the following lines to download and install an additional image
+# RUN wget <url-to-image> && \
+#     tar -xvzf <image-name>.tgz && \
+#     sudo mv <image-name> /usr/local/bin && \
+#     rm <image-name>.tgz
+
+# Install exercism CLI
+RUN wget https://github.com/exercism/cli/releases/download/v3.0.13/exercism-linux-64bit.tgz && \
+    tar -xvzf exercism-linux-64bit.tgz && \
+    mv exercism /usr/local/bin && \
+    rm exercism-linux-64bit.tgz
+
+# Add exercism to PATH
+ENV PATH $PATH:/usr/local/bin
+
+# Expose the port that the application will run on
+EXPOSE 8000
+
+RUN . ~/.bashrc
+
+# # Create a new user and set the working directory
+# RUN useradd -m learn 
+# USER learn
+# WORKDIR /home/learn
