@@ -28,6 +28,9 @@ RUN wget https://github.com/exercism/cli/releases/download/v3.0.13/exercism-linu
     mv exercism /usr/local/bin && \
     rm exercism-linux-64bit.tgz
 
+
+
+
 # Add exercism to PATH
 ENV PATH $PATH:/usr/local/bin
 
@@ -36,7 +39,15 @@ EXPOSE 8000
 
 RUN . ~/.bashrc
 
-# # Create a new user and set the working directory
 # RUN useradd -m learn 
 # USER learn
-# WORKDIR /home/learn
+WORKDIR /home/learn
+
+# Add Rustlings and tail to keep the container running
+RUN  git clone -b 5.3.0 --depth 1 https://github.com/rust-lang/rustlings;
+
+ENTRYPOINT cd /home/learn/rustlings && \
+    cargo install --force --path . && tail -f /dev/null
+
+
+# # Create a new user and set the working directory

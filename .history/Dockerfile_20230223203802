@@ -37,14 +37,14 @@ ENV PATH $PATH:/usr/local/bin
 # Expose the port that the application will run on
 EXPOSE 8000
 
-RUN . ~/.bashrc
+RUN  ~/.bashrc
 
-# RUN useradd -m learn 
-# USER learn
+RUN useradd -m learn 
+USER learn
 WORKDIR /home/learn
 
 # Add Rustlings and tail to keep the container running
-RUN  git clone -b 5.3.0 --depth 1 https://github.com/rust-lang/rustlings;
+RUN  cd /home/learn && git clone -b 5.3.0 --depth 1 https://github.com/rust-lang/rustlings;
 
 ENTRYPOINT cd /home/learn/rustlings && \
     cargo install --force --path . && tail -f /dev/null

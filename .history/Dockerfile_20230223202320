@@ -39,15 +39,14 @@ EXPOSE 8000
 
 RUN . ~/.bashrc
 
-# RUN useradd -m learn 
-# USER learn
-WORKDIR /home/learn
 
-# Add Rustlings and tail to keep the container running
-RUN  git clone -b 5.3.0 --depth 1 https://github.com/rust-lang/rustlings;
+# # Add Rustlings and tail to keep the container running
+# RUN if [ ! -d "/home/learn/rustlings" ]; then cd /home/learn && git clone -b 5.3.0 --depth 1 https://github.com/rust-lang/rustlings; \
+#     fi
 
 ENTRYPOINT cd /home/learn/rustlings && \
     cargo install --force --path . && tail -f /dev/null
-
-
 # # Create a new user and set the working directory
+# RUN useradd -m learn 
+# USER learn
+# WORKDIR /home/learn

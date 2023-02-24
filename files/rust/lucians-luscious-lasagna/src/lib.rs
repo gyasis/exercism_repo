@@ -2,15 +2,13 @@
 // to enable stricter warnings.
 #![allow(unused)]
 
-pub fn expected_minutes_in_oven() -> i32 {
-    unimplemented!("return expected minutes in the oven")
+pub fn expected_minutes_in_oven(x: i32) -> i32 {
+    let expected_minutes = x ;
 }
 
 pub fn remaining_minutes_in_oven(actual_minutes_in_oven: i32) -> i32 {
-    unimplemented!(
-        "calculate remaining minutes in oven given actual minutes in oven: {}",
-        actual_minutes_in_oven
-    )
+    expected_minutes_in_oven() - actual_minutes_in_oven
+    
 }
 
 pub fn preparation_time_in_minutes(number_of_layers: i32) -> i32 {
