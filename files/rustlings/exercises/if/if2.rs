@@ -10,10 +10,24 @@ pub fn foo_if_fizz(fizzish: &str) -> &str {
     if fizzish == "fizz" {
         "foo"
     } else {
-        1
+        "1"
+    }
+}
+pub fn bar_for_fuzz(fuzzish : &str) -> &str {
+    if fuzzish == "fuzz" {
+        "bar"
+    } else {
+        "1"
     }
 }
 
+pub fn default_to_baz(other: &str) -> &str {
+    if other == "literally anything" {
+        "baz"
+    } else {
+        "2"
+    }
+}
 // No test changes needed!
 #[cfg(test)]
 mod tests {
